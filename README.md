@@ -1,4 +1,11 @@
+# How to deploy ML models using Flask + Gunicorn + Nginx + Docker
+* https://towardsdatascience.com/how-to-deploy-ml-models-using-flask-gunicorn-nginx-docker-9b32055b3d0
+
 # Template for deploying ML models using Flask + Gunicorn + Nginx inside Docker
+
+## Stack architecture
+
+![Python Stack](docs/img/Python_Serving_Stack.png)
 
 ## Running the solution
 
@@ -34,4 +41,28 @@ For Docker installation instructions follow:
 │   └── Dockerfile
 ├── docker-compose.yml
 └── run_docker.sh
+```
+
+# Docker detail working
+
+Delete all containers
+```
+docker stop `docker ps -qa`
+docker rm -f $(docker ps -aq)
+docker container prune
+```
+
+Run this solution
+```
+bash run_docker.sh
+```
+
+Test the solution
+```
+curl http://localhost/
+
+curl --header "Content-Type: application/json" \
+--request POST \
+--data '{"index":3}' \
+http://localhost/
 ```
